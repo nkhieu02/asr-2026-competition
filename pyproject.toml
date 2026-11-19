@@ -1,0 +1,35 @@
+[project]
+name = "geo-asr"
+version = "0.1.0"
+description = "Esperanto ASR: XLS-R CTC / joint CTC-attention models with KenLM decoding"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    # macOS arm64 wheels from PyPI include the MPS backend; no CUDA index needed.
+    "torch>=2.15",
+    "transformers>=5.22",
+    "accelerate>=1.15",
+    "datasets>=5.2",
+    "evaluate>=0.4.6",
+    "jiwer>=4.0",
+    "soundfile>=0.14",
+    "numpy>=2.5",
+    "pandas>=3.1",
+    "matplotlib>=3.11",
+    "pyctcdecode>=0.5",
+    "kenlm>=0.2",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2",
+    "ipykernel>=7.4",
+]
+
+[tool.uv]
+# Not an installable package: run scripts as modules from the project root,
+# e.g. `uv run python -m scripts.train.ctc ...`
+package = false
+environments = ["sys_platform == 'darwin'", "sys_platform == 'linux'"]
+# pyctcdecode 0.5.0 declares numpy<2 but works with numpy 2.x.
+override-dependencies = ["numpy>=2.5"]

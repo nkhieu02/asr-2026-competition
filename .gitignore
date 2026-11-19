@@ -1,0 +1,8 @@
+*cache*
+data/
+.env
+.venv/
+runs/
+*.bin
+*.arpa
+.DS_Store
